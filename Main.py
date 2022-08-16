@@ -1,60 +1,54 @@
 class MyCircularQueue:
     def __init__(self, size: int):
-        # Write code here
-        self.size = size 
+        self.size = size
         self.rear = -1
-        self.front = -1 
-        self.queue = []
-        
-        
+        self.front = -1
+        self.queue = [None] * size
+      
 
     def enqueue(self, value: int) -> bool:
-        # Write code here
-        if not self.is_full():
-            self.rear = (self.rear+1)%len(self.queue)
-            self.queue.append(value)
-            self.size = self.size+1
-            
-        
+
+        if (self.is_full() == False):
+            if (self.front == -1):
+                self.front = 0
+                self.rear = 0
+                self.queue[self.rear] = value
+            else:
+                self.rear = (self.rear + 1) % self.size
+                self.queue[self.rear] = value
+            return 1
+        else:
+            return 0
 
     def dequeue(self) -> bool:
-        # Write code here
-        self.front = (self.front+1)%len(self.size)
-        self.size = self.size-1
-        self.queue.pop()
+        if (self.is_empty() == False):
+            if (self.front == self.rear):
+                self.front = -1
+                self.rear = -1
+                return 1
+            else:
+                self.front = (self.front + 1) % self.size
+                return 1
+        else:
+            return 0
 
     def get_front(self) -> int:
-        # Write code here
-        if not self.is_empty():
-            self.front+=1
+        if (self.is_empty() == False):
             return self.queue[self.front]
         else:
             return -1
-                
 
     def get_rear(self):
-        # Write code here
-        if not self.is_empty():
-            self.rear+=1
+        if (self.is_empty() == False):
             return self.queue[self.rear]
         else:
             return -1
 
     def is_empty(self):
-        # Write code here
-        if self.size == 0:
-            return 1
-        else :
-            return 0 
+        return self.front == -1
 
     def is_full(self):
-        # Write code here
-        if self.size == len(self.queue):
-            return 1
-        else :
-            return 0
-        
-            
+        return (self.rear + 1) % self.size == self.front
 
 
 # Do not change the following code
