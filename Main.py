@@ -12,7 +12,7 @@ class MyCircularQueue:
         # Write code here
         if not is_full():
             self.rear = (self.rear+1)%len(self.queue)
-            
+            self.queue.append(value)
             self.size = self.size+1
             
         
@@ -21,6 +21,7 @@ class MyCircularQueue:
         # Write code here
         self.front = (self.front+1)%len(self.size)
         self.size = self.size-1
+        self.queue.pop()
 
     def get_front(self) -> int:
         # Write code here
